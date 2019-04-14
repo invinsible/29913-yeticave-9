@@ -40,9 +40,8 @@ function formatPrice($num){
   
   if($numCeil < 1000) {
     return $numCeil;
-  }else{
-    return number_format($numCeil, 0, '', ' ');
   }
+  return number_format($numCeil, 0, '', ' '); 
 }
 ?>
 <!DOCTYPE html>
