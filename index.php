@@ -34,6 +34,16 @@ $lots = [
   'price' => 5400,
   'url' => 'img/lot-6.jpg']
 ];
+
+function formatPrice($num){
+  $numCeil = ceil($num); 
+  
+  if($numCeil < 1000) {
+    return $numCeil;
+  }else{
+    return number_format($numCeil, 0, '', ' ');
+  }
+}
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -75,10 +85,6 @@ $lots = [
               </li>
             </ul>
           <?php endif; ?>
-           
-          
-        <!-- здесь должен быть PHP код для показа меню и данных пользователя -->
-
         </nav>
     </div>
 </header>
@@ -87,8 +93,7 @@ $lots = [
     <section class="promo">
         <h2 class="promo__title">Нужен стафф для катки?</h2>
         <p class="promo__text">На нашем интернет-аукционе ты найдёшь самое эксклюзивное сноубордическое и горнолыжное снаряжение.</p>
-        <ul class="promo__list">
-            <!--заполните этот список из массива категорий-->
+        <ul class="promo__list">            
             <?php foreach ($categories as $key => $value):?>            
               <li class="promo__item promo__item--boards">
                   <a class="promo__link" href="pages/all-lots.html"><?=$value; ?></a>                                
@@ -100,8 +105,7 @@ $lots = [
         <div class="lots__header">
             <h2>Открытые лоты</h2>
         </div>
-        <ul class="lots__list">
-            <!--заполните этот список из массива с товарами-->
+        <ul class="lots__list">            
             <?php foreach ($lots as $key => $value):?>
               <li class="lots__item lot">
                   <div class="lot__image">
@@ -113,7 +117,7 @@ $lots = [
                       <div class="lot__state">
                           <div class="lot__rate">
                               <span class="lot__amount">Стартовая цена</span>
-                              <span class="lot__cost"><?=$value['price']; ?><b class="rub">р</b></span>
+                              <span class="lot__cost"><?=formatPrice($value['price']); ?><b class="rub">р</b></span>
                           </div>
                           <div class="lot__timer timer">
                               12:23
@@ -129,8 +133,7 @@ $lots = [
 
 <footer class="main-footer">
     <nav class="nav">
-        <ul class="nav__list container">
-            <!--заполните этот список из массива категорий-->
+        <ul class="nav__list container">            
             <?php foreach ($categories as $key => $value):?>
               <li class="nav__item">
                   <a href="pages/all-lots.html"><?=$value; ?></a>
