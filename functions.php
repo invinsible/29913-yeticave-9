@@ -32,3 +32,9 @@ function esc($str) {
 	$text = htmlspecialchars($str);
 	return $text;
 }
+
+//Работа с датами лотов
+$lotEnd = date_create('tomorrow');
+$lotNow = date_create("now");
+$lotDiff = date_diff($lotEnd, $lotNow);
+$lotTime = date_interval_format($lotDiff, "%H:%I");
