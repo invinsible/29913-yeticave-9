@@ -27,8 +27,8 @@
                           <span class="lot__amount">Стартовая цена</span>
                           <span class="lot__cost"><?=formatPrice($value['price']); ?><b class="rub">р</b></span>
                       </div>
-                      <div class="lot__timer timer <?php if ($lotTime <= '01:00'):?>timer--finishing<?php endif; ?>">
-                        <?=$lotTime;?>                       
+                      <div class="lot__timer timer <?php if (lotTime('tomorrow') <= 60):?>timer--finishing<?php endif; ?>">
+                        <?=lotTimeFormat(lotTime('tomorrow'));?>                      
                       </div>
                   </div>
               </div>
