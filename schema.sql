@@ -9,6 +9,7 @@ CREATE TABLE categories (
   name CHAR(68),
   code CHAR(68)  
 );
+CREATE UNIQUE INDEX catName ON categories(name);
 
 CREATE TABLE lots (
   id INT AUTO_INCREMENT PRIMARY KEY,
@@ -21,15 +22,18 @@ CREATE TABLE lots (
   cost INT,
   user INT,
   winner INT,
-  catgory INT
+  category INT
 );
+CREATE INDEX lotName ON lots(name);
+CREATE INDEX lotPrice ON lots(price);
+CREATE INDEX lotCategory ON lots(category);
 
 CREATE TABLE costs (
   id INT AUTO_INCREMENT PRIMARY KEY,
   date_create DATE,
   price INT,
   user INT,
-  catgory INT  
+  category INT  
 );
 
 CREATE TABLE users (
@@ -43,6 +47,8 @@ CREATE TABLE users (
   lot INT,
   cost INT  
 );
+CREATE UNIQUE INDEX email ON users(email);
+CREATE INDEX userName ON users(name);
 
 INSERT INTO categories
 SET name = 'Доски и лыжи', code = 'boards';
