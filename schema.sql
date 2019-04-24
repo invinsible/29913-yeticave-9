@@ -6,38 +6,38 @@ USE yeticave_29913;
 
 CREATE TABLE categories (
   id INT AUTO_INCREMENT PRIMARY KEY,
-  name CHAR(68),
-  code CHAR(68)  
+  name CHAR(68) NOT NULL,
+  code CHAR(68) NOT NULL  
 );
 
 CREATE TABLE lots (
   id INT AUTO_INCREMENT PRIMARY KEY,
-  date_create DATE,
-  name CHAR(255),
+  date_create TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  name CHAR(255) NOT NULL,
   description TEXT,
   img CHAR(255),
-  price INT,
-  date_end DATE,
+  price INT NOT NULL,
+  date_end TIMESTAMP NOT NULL,
   cost INT,
-  user_id INT,
+  user_id INT NOT NULL,
   winner_id INT,
-  category_id INT
+  category_id INT NOT NULL
 );
 
 CREATE TABLE costs (
   id INT AUTO_INCREMENT PRIMARY KEY,
-  date_create DATE,
-  price INT,
-  user_id INT,
-  lot_id INT  
+  date_create TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  price INT NOT NULL,
+  user_id INT NOT NULL,
+  lot_id INT NOT NULL 
 );
 
 CREATE TABLE users (
   id INT AUTO_INCREMENT PRIMARY KEY,
-  date_register DATE,
-  email CHAR(68),
-  name CHAR(68),
-  password CHAR(126),
+  date_register TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  email CHAR(128) NOT NULL,
+  name CHAR(68) NOT NULL,
+  password CHAR(126) NOT NULL,
   avatar CHAR(255),
   contacts TEXT,
   lot_id INT,
@@ -57,17 +57,3 @@ ALTER TABLE costs ADD FOREIGN KEY (user_id) REFERENCES users (id);
 ALTER TABLE costs ADD FOREIGN KEY (lot_id) REFERENCES lots (id);
 ALTER TABLE users ADD FOREIGN KEY (lot_id) REFERENCES lots (id);
 ALTER TABLE users ADD FOREIGN KEY (cost_id) REFERENCES costs (id);
-
-
-INSERT INTO categories
-SET name = 'Доски и лыжи', code = 'boards';
-INSERT INTO categories
-SET name = 'Крепления', code = 'attachment';
-INSERT INTO categories
-SET name = 'Ботинки', code = 'boots';
-INSERT INTO categories
-SET name = 'Одежда', code = 'clothing';
-INSERT INTO categories
-SET name = 'Инструменты', code = 'tools';
-INSERT INTO categories
-SET name = 'Разное', code = 'other';
