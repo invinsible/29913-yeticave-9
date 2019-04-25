@@ -37,10 +37,15 @@ VALUES
 SELECT * FROM `categories`;
 
 /* Выводим определенные поля открытых лотов */
-SELECT name, price, img, category_id FROM lots WHERE winner_id != 0;
+SELECT lots.name, lots.price as start_price, img, categories.name as category_name, MAX(costs.price) as current_price FROM lots INNER JOIN categories ON lots.category_id = categories.id LEFT JOIN costs ON costs.lot_id = lots.id WHERE lots.winner_id IS NULL GROUP BY lots.id;
 
 /* Отображение лота по id */
 SELECT * FROM lots l JOIN categories c ON l.category_id = c.id WHERE l.id = 1;
 
 /* Обновить имя лота по id */
 UPDATE lots SET name = 'Test Udpate Lot' WHERE id = 1;
+
+/* Получить список самых свежих ставок для лота по его идентификатору */
+SELECT * FROM costs WHERE lot_id = 1 ORDER BY date_create DESC;
+
+
