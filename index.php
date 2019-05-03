@@ -11,7 +11,7 @@ if($catResult) {
   $categories = mysqli_fetch_all($catResult, MYSQLI_ASSOC);
 } 
 
-$lotSql = "SELECT lots.name AS lot_name, categories.name AS cat_name, price, img, date_end FROM lots INNER JOIN categories ON lots.category_id = categories.id WHERE date_end >= NOW()";
+$lotSql = "SELECT lots.name AS lot_name, categories.name AS cat_name, lots.id AS lot_id, price, img, date_end FROM lots INNER JOIN categories ON lots.category_id = categories.id WHERE date_end >= NOW()";
 $lotResult = mysqli_query($db, $lotSql);
 if($catResult) {
   $lots = mysqli_fetch_all($lotResult, MYSQLI_ASSOC);
