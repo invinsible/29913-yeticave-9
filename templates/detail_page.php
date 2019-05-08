@@ -1,3 +1,11 @@
+<?php 
+if (isset($_GET['page'])) {
+  $lotId = $_GET['page'] - 1;
+  $lot = $lots[$lotId];
+} else {
+  http_response_code(404);
+}
+?>
 <main>
   <nav class="nav">
     <ul class="nav__list container">
@@ -9,10 +17,6 @@
     </ul>
   </nav>
   <section class="lot-item container">
-  <?php $lotId = $_GET['page']-1;
-  $lot = $lots[$lotId];
-  ?>
-
     <h2><?=esc($lot['lot_name']); ?></h2>
     <div class="lot-item__content">
       <div class="lot-item__left">
