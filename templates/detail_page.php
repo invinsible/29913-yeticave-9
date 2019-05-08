@@ -4,6 +4,7 @@ if (isset($_GET['page'])) {
   $lot = $lots[$lotId];
 } else {
   http_response_code(404);
+  header("location: /pages/404.html");
 }
 ?>
 <main>
