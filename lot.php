@@ -3,14 +3,17 @@ require_once(__DIR__ . '/inc/functions.php'); // Функции
 require_once(__DIR__ . '/inc/queries.php'); // Вызовы и подключения
 $configArr = require_once(__DIR__ . '/config/db.php'); // Конфигурация базы данных
 
-if (isset($_GET['pageId']) && !empty($_GET['pageId']))  {
-  $pageId = $_GET['pageId'];  
+if (isset($_GET['pageId']) && !empty($_GET['pageId']))  {    
   $dbConnect = getConn($configArr);
+  $pageId = mysqli_real_escape_string($dbConnect, $_GET['pageId']);
   $categories = getCategories($dbConnect); 
   $lot = getLot($dbConnect, $pageId);
 
 } else {
   http_response_code(404);
+  include_template('error.php', [
+    'categories' => $categories    
+  ]);
   header("location: /pages/404.html");
 }
 
