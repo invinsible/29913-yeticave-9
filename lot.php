@@ -1,15 +1,11 @@
 <?php
-require_once('functions.php');
-$config = require_once('config/db.php');
+require_once(__DIR__ . '/inc/functions.php'); // Функции
+require_once(__DIR__ . '/inc/queries.php'); // Вызовы и подключения
+$configArr = require_once(__DIR__ . '/config/db.php'); // Конфигурация базы данных
 
-$db = mysqli_connect($config['host'], $config['user'], $config['password'], $config['database']);
-mysqli_set_charset($db, "utf8");
+$dbConnect = getConn($configArr);
+$categories = getCategories($dbConnect); 
 
-$catSql = "SELECT * FROM categories";
-$catResult = mysqli_query($db, $catSql);
-if($catResult) {
-  $categories = mysqli_fetch_all($catResult, MYSQLI_ASSOC);
-} 
 
 $lotSql = "SELECT lots.name AS lot_name, categories.name AS cat_name, lots.id AS lot_id, lots.description AS lot_descr, price, img, date_end FROM lots INNER JOIN categories ON lots.category_id = categories.id WHERE date_end >= NOW()";
 $lotResult = mysqli_query($db, $lotSql);
