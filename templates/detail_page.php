@@ -1,12 +1,3 @@
-<?php 
-if (isset($_GET['page'])) {
-  $lotId = $_GET['page'] - 1;
-  $lot = $lots[$lotId];
-} else {
-  http_response_code(404);
-  header("location: /pages/404.html");
-}
-?>
 <main>
   <nav class="nav">
     <ul class="nav__list container">

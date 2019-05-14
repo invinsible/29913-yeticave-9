@@ -22,7 +22,7 @@
                 </div>
                 <div class="lot__info">
                     <span class="lot__category"><?=esc($lot['cat_name']); ?></span>
-                    <h3 class="lot__title"><a class="text-link" href="/lot.php?page=<?=esc($lot['lot_id']); ?>"><?=esc($lot['lot_name']); ?></a></h3>
+                    <h3 class="lot__title"><a class="text-link" href="/lot.php?pageId=<?=esc($lot['lot_id']); ?>"><?=esc($lot['lot_name']); ?></a></h3>
                     <div class="lot__state">
                         <div class="lot__rate">
                             <span class="lot__amount">Стартовая цена</span>

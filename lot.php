@@ -3,20 +3,20 @@ require_once(__DIR__ . '/inc/functions.php'); // Функции
 require_once(__DIR__ . '/inc/queries.php'); // Вызовы и подключения
 $configArr = require_once(__DIR__ . '/config/db.php'); // Конфигурация базы данных
 
-$dbConnect = getConn($configArr);
-$categories = getCategories($dbConnect); 
+if (isset($_GET['pageId']) && !empty($_GET['pageId']))  {
+  $pageId = $_GET['pageId'];  
+  $dbConnect = getConn($configArr);
+  $categories = getCategories($dbConnect); 
+  $lot = getLot($dbConnect, $pageId);
 
-
-$lotSql = "SELECT lots.name AS lot_name, categories.name AS cat_name, lots.id AS lot_id, lots.description AS lot_descr, price, img, date_end FROM lots INNER JOIN categories ON lots.category_id = categories.id WHERE date_end >= NOW()";
-$lotResult = mysqli_query($db, $lotSql);
-if($catResult) {
-  $lots = mysqli_fetch_all($lotResult, MYSQLI_ASSOC);
+} else {
+  http_response_code(404);
+  header("location: /pages/404.html");
 }
 
-
-  $page_content = include_template('detail_page.php', [
+$page_content = include_template('detail_page.php', [
     'categories' => $categories,
-    'lots' => $lots
+    'lot' => $lot
   ]);
 
   $layout_content = include_template('layout.php', [ 
